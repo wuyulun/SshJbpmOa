@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="Device" table="hyjcy_device">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="type" column="type"></property>
+		<property name="brand" column="brand"></property>
+		<property name="model" column="model"></property>
+		<property name="parameter" column="parameter"></property>
+		<property name="buytime" column="buytime"></property>
+		<property name="possessor" column="possessor"></property>
+		<property name="department" column="department"></property>
+
+
+		<!-- possessor属性，表示我与User的多对一关系 -->
+		<!-- <many-to-one name="possessor" class="User" column="possessorId"></many-to-one>
+
+		department属性，表示我与Department的多对一关系
+		<many-to-one name="department" class="Department" column="departmentId"></many-to-one> -->
+
+
+	</class>
+
+</hibernate-mapping>

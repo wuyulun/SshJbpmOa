@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="DiningRecord" table="hyjcy_diningRecord_today">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="day" column="day"></property>
+		<property name="lunch" column="lunch"></property>
+		<property name="dinner" column="dinner"></property>
+
+
+		<!-- diner属性，表示我与User的多对一关系 -->
+		<many-to-one name="diner" class="User" column="userId"></many-to-one>
+
+	</class>
+
+</hibernate-mapping>

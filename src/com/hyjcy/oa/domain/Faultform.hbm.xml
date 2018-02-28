@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="Faultform" table="hyjcy_faultform">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="type" column="type"></property>
+		<property name="brand" column="brand"></property>
+		<property name="model" column="model"></property>
+		<property name="description" column="description"></property>
+		<property name="department" column="department"></property>
+		<property name="applytime" column="applytime"></property>
+		<property name="donetime" column="donetime"></property>
+		<property name="status" column="status"></property>
+
+
+		<!-- applicant属性，表示我与User的多对一 -->
+		<many-to-one name="applicant" class="User" column="applicantId"></many-to-one>
+		<!-- faultapproveinfos属性，表示我与FaultApproveinfo的一对多 -->
+		<set name="faultapproveinfos">
+			<key column="faultformId"></key>
+			<one-to-many class="FaultApproveinfo"/>
+		</set>
+
+
+	</class>
+
+</hibernate-mapping>

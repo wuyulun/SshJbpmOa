@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="UcsendApproveinfo" table="hyjcy_ucsendApproveinfo">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="sendapproveTime" column="sendapproveTime" ></property>
+		<property name="message" column="message" ></property>
+		<!-- usecarform属性，表示我与Goodsform的多对一 -->
+		<many-to-one name="usecarform" class="Usecarform" column="usecarformId"></many-to-one>
+		
+		
+		<!-- ucleaderapprover属性，表示我与User的多对一 -->
+		<many-to-one name="ucsendapprover" class="User" column="ucsendapproverId"></many-to-one>
+		
+		
+	</class>
+	
+</hibernate-mapping>

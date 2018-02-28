@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="用车流程" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="129,70,48,48" name="start1">
+      <transition g="-52,-22" name="to 用车申请" to="用车申请"/>
+   </start>
+   <task assignee="#{usecarform.uapplicant.name}" g="275,159,92,52" name="用车申请">
+      <transition g="-52,-22" name="to 领导审批" to="领导审批"/>
+   </task>
+   <task assignee="黄东平" g="490,254,92,52" name="领导审批">
+      <transition g="-52,-22" name="to 发车" to="发车"/>
+   </task>
+   <task assignee="林森" g="666,371,92,52" name="发车">
+      <transition g="-50,-22" name="to end1" to="end1"/>
+   </task>
+   <end g="861,494,48,48" name="end1"/>
+</process>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="GoodsApproveinfo" table="hyjcy_goodsApproveinfo">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="goodapproveTime" column="goodapproveTime" ></property>
+		<property name="gapproval" column="gapproval"></property>
+		<property name="comment" column="comment"></property>
+		
+		
+		<!-- goodsform属性，表示我与Goodsform的多对一 -->
+		<many-to-one name="goodsform" class="Goodsform" column="goodsformId"></many-to-one>
+		
+		
+		<!-- goodapprover属性，表示我与User的多对一 -->
+		<many-to-one name="goodapprover" class="User" column="goodapproverId"></many-to-one>
+		
+		
+	</class>
+	
+</hibernate-mapping>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 配置为开发模式，更改配置文件后不用重新启动 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 把action扩展名改为.do -->
+	<constant name="struts.action.extension" value="do" />
+	<!-- 把主题设为simple -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<package name="default" namespace="/" extends="struts-default">
+        
+        <interceptors>
+			<!-- 申明拦截器 -->
+			<interceptor name="checkPrivilege"
+				class="com.hyjcy.oa.util.CheckPrivilegeInterceptor"></interceptor>
+
+			<!-- 配置默认拦截器栈 -->
+			<interceptor-stack name="myDefaultStack">
+				<interceptor-ref name="checkPrivilege"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="myDefaultStack"></default-interceptor-ref>
+
+		<!-- 配置全局的Redules -->
+		<global-results>
+			<result name="loginUI">/WEB-INF/jsp/loginoutAction/loginUI.jsp</result>
+			<result name="noPrivilegeUI">/noPrivilegeUI.jsp</result>
+		</global-results>
+        
+		<!-- 配置测试用的action -->
+		<action name="Test" class="testActionone">
+			<result name="success">/test.jsp</result>
+		</action>
+
+		<!-- 岗位管理 -->
+		<action name="role_*" class="roleAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/roleAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/roleAction/saveUI.jsp</result>
+			<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp
+			</result>
+			<result name="toList" type="redirectAction">role_list</result>
+		</action>
+
+
+		<!-- 部门管理 -->
+		<action name="department_*" class="departmentAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/departmentAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/departmentAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">department_list?parentId=${parentId}
+			</result>
+		</action>
+
+		<!-- 用户管理 -->
+		<action name="user_*" class="useraction" method="{1}">
+			<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/userAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">user_list</result>
+			<result name="personUI">/WEB-INF/jsp/userAction/personUI.jsp</result>
+			<result name="person" type="redirectAction">home_main</result>
+		</action>
+
+      <!-- 登录注销功能 -->
+    	<action name="loginout_*" class="loginoutAction" method="{1}">
+    		<result name="logout">/WEB-INF/jsp/loginoutAction/logout.jsp</result>
+    		<result name="toHome" type="redirect">/index.jsp</result>
+    	</action>
+    	
+    	
+    	<!-- 首页 -->
+    	<action name="home_*" class="homeAction" method="{1}">
+   			<result name="{1}">/WEB-INF/jsp/homeAction/{1}.jsp</result>    
+    	</action>
+    	
+    	
+    	
+    	<!-- 流程定义管理 -->
+		<action name="processDefinition_*" class="processDefinitionAction"
+			method="{1}">
+			<result name="list">/WEB-INF/jsp/processDefinitionAction/list.jsp
+			</result>
+			<result name="saveUI">/WEB-INF/jsp/processDefinitionAction/saveUI.jsp
+			</result>
+			<result name="toList" type="redirectAction">processDefinition_list</result>
+			<!-- 下载的result是string类型 -->
+			<result name="showProcessImage" type="stream">
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<!-- 订餐管理 -->
+    	<action name="dining_*" class="diningAction" method="{1}">
+    		<result name="index">/WEB-INF/jsp/diningAction/index.jsp</result>
+    		<result name="cancelSuccess">/WEB-INF/jsp/diningAction/cancelSuccess.jsp</result>
+    		<result name="bookSuccess">/WEB-INF/jsp/diningAction/bookSuccess.jsp</result>
+    		<result name="timeOut">/WEB-INF/jsp/diningAction/timeOut.jsp</result>
+    		<result name="statistics">/WEB-INF/jsp/diningAction/statistics.jsp</result>
+    		<result name="list">/WEB-INF/jsp/diningAction/list.jsp</result>
+    		<result name="record">/WEB-INF/jsp/diningAction/record.jsp</result>
+    		<result name="recordAm">/WEB-INF/jsp/diningAction/recordAm.jsp</result>
+    		<result name="recordPm">/WEB-INF/jsp/diningAction/recordPm.jsp</result>
+    	</action>
+		
+    	<!-- 故障审批流程流程 -->
+		<action name="guzhangshenpi_*" class="guzhangshenpiAction"
+			method="{1}">
+			<result name="shenqing">/WEB-INF/jsp/guzhangshenpi/guzhangshenbao.jsp</result>
+			<result name="chuli">/WEB-INF/jsp/guzhangshenpi/guzhangchuli.jsp</result>
+			<result name="tijiao" type="redirectAction">guzhangshenpi_jilu</result>
+			<result name="jilu" >/WEB-INF/jsp/guzhangshenpi/shenbaojilu.jsp</result>
+			<result name="shouli" type="redirectAction">guzhangshenpi_chuli</result>
+			<result name="shenpijilu" >/WEB-INF/jsp/guzhangshenpi/shenpijilu.jsp</result>
+		</action>
+		
+		<!-- 设备信息 -->
+		<action name="Device_*" class="deviceAction" method="{1}">
+			<result name="mydevice">/WEB-INF/jsp/deviceAction/mydevice.jsp</result>
+			<result name="alldevice">/WEB-INF/jsp/deviceAction/alldevice.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/deviceAction/adddevice.jsp</result>
+			<result name="editUI">/WEB-INF/jsp/deviceAction/editdevice.jsp</result>
+			<result name="adddevice" type="redirectAction">Device_list</result>
+			<result name="editdevice" type="redirectAction">Device_list</result>
+			<result name="deletedevice" type="redirectAction">Device_list</result>
+		</action>
+		
+		<!-- 车辆信息 -->
+		<action name="Car_*" class="carAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/carAction/list.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/carAction/addUI.jsp</result>
+			<result name="editUI">/WEB-INF/jsp/carAction/editUI.jsp</result>
+			<result name="addcar" type="redirectAction">Car_list</result>
+			<result name="editcar" type="redirectAction">Car_list</result>
+			<result name="deletecar" type="redirectAction">Car_list</result>
+		</action>
+		
+		
+    	<!-- 物品领取流程 -->
+		<action name="wupinshenpi_*" class="wupinshenpiAction"
+			method="{1}">
+			<result name="shenqing">/WEB-INF/jsp/wupinshenpi/wupinshenqing.jsp</result>
+			<result name="chuli">/WEB-INF/jsp/wupinshenpi/daibanshenqing.jsp</result>
+			<result name="tijiao">/WEB-INF/jsp/wupinshenpi/shenqingjilu.jsp</result>
+			<result name="jilu" >/WEB-INF/jsp/wupinshenpi/goodsshenqingjilu.jsp</result>
+			<result name="shouli" type="redirectAction">wupinshenpi_chuli</result>
+			<result name="shenpijilu" >/WEB-INF/jsp/wupinshenpi/shenpijilu.jsp</result>
+			<result name="approveUI" >/WEB-INF/jsp/wupinshenpi/approveUI.jsp</result>
+		</action>
+    	<!-- 用车流程 -->
+		<action name="usecar_*" class="usecarAction"
+			method="{1}">
+			<result name="shenqing">/WEB-INF/jsp/usecarAction/ucshenqing.jsp</result>
+			<result name="lingdaochuli">/WEB-INF/jsp/usecarAction/lingdaochuli.jsp</result>
+			<result name="tijiao">/WEB-INF/jsp/usecarAction/usecarjilua.jsp</result>
+			<result name="usecarjilu" >/WEB-INF/jsp/usecarAction/usecarjilu.jsp</result>
+			<result name="shouli" type="redirectAction">usecar_lingdaochuli</result>
+			<result name="lingdaoshenpijilu" >/WEB-INF/jsp/usecarAction/lingdaoshenpijilu.jsp</result>
+			<result name="approveUI" >/WEB-INF/jsp/usecarAction/approveUI.jsp</result>
+			<result name="shoucheyuansp" >/WEB-INF/jsp/usecarAction/shoucheyuansp.jsp</result>
+			<result name="approve" type="redirectAction">usecar_shoucheyuansp</result>
+			<result name="shoucheyuanjl" >/WEB-INF/jsp/usecarAction/shoucheyuanjl.jsp</result>
+			<result name="message" >/WEB-INF/jsp/usecarAction/message.jsp</result>
+		</action>
+
+		<!-- 申请模板管理 -->
+		<action name="template_*" class="templateAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/templateAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/templateAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">template_list</result>
+			<!-- 下载用的用result是stream类型 -->
+			<result name="download" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream</param>
+				<param name="contentDisposition">attachment;filename="${#fileName}.doc"</param><!--加#号从mAP里面获取  -->
+			</result>
+		</action>
+
+		<!-- 流转功能 -->
+		<action name="flow_*" class="flowAction" method="{1}">
+			<!-- 申请人 -->
+			<result name="templateList">/WEB-INF/jsp/flowAction/templateList.jsp</result>
+			<result name="submitUI">/WEB-INF/jsp/flowAction/submitUI.jsp</result>
+			<result name="myApplicationList">/WEB-INF/jsp/flowAction/myApplicationList.jsp
+			</result>
+			<result name="toMyApplicationList" type="redirectAction">flow_myApplicationList
+			</result>
+			<!-- 审批人 -->
+			<result name="myTaskList">/WEB-INF/jsp/flowAction/myTaskList.jsp</result>
+			<result name="approveUI">/WEB-INF/jsp/flowAction/approveUI.jsp</result>
+			<result name="approvedHistory">/WEB-INF/jsp/flowAction/approvedHistory.jsp
+			</result>
+			<result name="toMyTaskList" type="redirectAction">flow_myTaskList</result>
+		</action>
+    	
+		
+	</package>
+
+</struts>

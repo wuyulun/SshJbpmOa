@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="Goodsform" table="hyjcy_goodsform">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="muchGoods" column="muchGoods"></property>
+		<property name="reason" column="reason"></property>
+		<property name="department" column="department"></property>
+		<property name="applytime" column="applytime"></property>
+		<property name="donetime" column="donetime"></property>
+		<property name="status" column="status"></property>
+
+
+		<!-- gapplicant属性，表示我与User的多对一 -->
+		<many-to-one name="gapplicant" class="User" column="gapplicantId"></many-to-one>
+
+
+	</class>
+
+</hibernate-mapping>

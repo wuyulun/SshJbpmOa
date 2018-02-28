@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="Usecarform" table="hyjcy_usecarform">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="ucdepartment" column="ucdepartment"></property>
+		<property name="place" column="place"></property>
+		<property name="usecartime" column="usecartime"></property>
+		<property name="people" column="people"></property>
+		<property name="stuff" column="stuff"></property>
+		<property name="applytime" column="applytime"></property>
+		<property name="leadertime" column="leadertime"></property>
+		<property name="cartime" column="cartime"></property>
+		<property name="status" column="status"></property>
+		<property name="carmessage" column="carmessage"></property>
+
+
+		<!-- gapplicant属性，表示我与User的多对一 -->
+		<many-to-one name="uapplicant" class="User" column="uapplicantId"></many-to-one>
+
+		<many-to-one name="leader" class="User" column="leaderId"></many-to-one>
+
+	</class>
+
+</hibernate-mapping>

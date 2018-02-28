@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="物品领取" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="38,16,48,48" name="start1">
+      <transition g="-52,-22" name="to 提交申请" to="提交申请"/>
+   </start>
+   <end g="44,387,48,48" name="end1"/>
+   <task assignee="#{goodsForm.gapplicant.name}" g="16,135,92,52" name="提交申请">
+      <transition g="-52,-22" name="to 物品管理员" to="物品管理员审批"/>
+   </task>
+   <task assignee="叶文课" g="22,266,92,52" name="物品管理员审批">
+      <transition g="-50,-22" name="to end" to="end1"/>
+   </task>
+</process>

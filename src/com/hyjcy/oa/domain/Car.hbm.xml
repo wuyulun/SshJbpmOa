@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="Car" table="hyjcy_car">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="brand" column="type"></property>
+		<property name="seat" column="brand"></property>
+		<property name="number" column="number"></property>
+		<property name="buytime" column="buytime"></property>
+
+
+	</class>
+
+</hibernate-mapping>

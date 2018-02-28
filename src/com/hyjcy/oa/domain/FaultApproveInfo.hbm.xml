@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hyjcy.oa.domain">
+
+	<class name="FaultApproveinfo" table="hyjcy_faultApproveinfo">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="approveTime" column="approveTime" ></property>
+		<property name="approval" column="approval"></property>
+		<property name="comment" column="comment"></property>
+		
+		
+		<!-- faultform属性，表示我与Faultform的多对一 -->
+		<many-to-one name="faultform" class="Faultform" column="faultformId"></many-to-one>
+		
+		
+		<!-- approver属性，表示我与User的多对一 -->
+		<many-to-one name="faultapprover" class="User" column="faultapproverId"></many-to-one>
+		
+		
+	</class>
+	
+</hibernate-mapping>
